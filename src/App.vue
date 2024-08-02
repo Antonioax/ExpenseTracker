@@ -12,7 +12,7 @@ const toast = useToast();
 const transactions = ref([
   { id: 1, text: "Car", amount: 200.22 },
   { id: 2, text: "Car", amount: 200 },
-  { id: 2, text: "Car", amount: -33 },
+  { id: 3, text: "Car", amount: -33 },
 ]);
 
 const total = computed(() => {
@@ -38,7 +38,7 @@ const expense = computed(() => {
 
 const onTransaction = (transaction) => {
   transactions.value.push({
-    if: generateUniqueId(),
+    id: generateUniqueId(),
     text: transaction.text,
     amount: transaction.amount,
   });
@@ -49,6 +49,11 @@ const onTransaction = (transaction) => {
 const generateUniqueId = () => {
   return Math.floor(Math.random() * 1000000);
 };
+
+const onDelete = (id) => {
+  transactions.value = transactions.value.filter((t) => t.id !== id);
+  toast.success("Transaction deleted");
+};
 </script>
 
 <template>
@@ -57,7 +62,10 @@ const generateUniqueId = () => {
     <Balance :total="total"></Balance>
     <IncomeExpenses :income="+income" :expense="+expense"></IncomeExpenses>
     <AddTransaction @transaction="onTransaction"></AddTransaction>
-    <TransactionList :transactions="transactions"></TransactionList>
+    <TransactionList
+      :transactions="transactions"
+      @deleted="onDelete"
+    ></TransactionList>
   </div>
 </template>
 

@@ -5,6 +5,12 @@ defineProps({
     required: true,
   },
 });
+
+const emit = defineEmits(["deleted"]);
+
+const onDelete = (id) => {
+  emit("deleted", id);
+};
 </script>
 
 <template>
@@ -16,7 +22,7 @@ defineProps({
       :class="transaction.amount < 0 ? 'minus' : 'plus'"
     >
       {{ transaction.text }} <span>${{ transaction.amount }}</span
-      ><button class="delete-btn">X</button>
+      ><button class="delete-btn" @click="onDelete(transaction.id)">X</button>
     </li>
   </ul>
 </template>
