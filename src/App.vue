@@ -52,7 +52,6 @@ const generateUniqueId = () => {
   } while (allIds.has(id));
 
   allIds.add(id);
-  console.log(allIds);
   return id;
 };
 
