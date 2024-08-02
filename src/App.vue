@@ -46,12 +46,22 @@ const onTransaction = (transaction) => {
   toast.success("Transaction added");
 };
 
+const allIds = new Set(transactions.value.map((t) => t.id));
+
 const generateUniqueId = () => {
-  return Math.floor(Math.random() * 1000000);
+  let id;
+  do {
+    id = Math.floor(Math.random() * 1000000);
+  } while (allIds.has(id));
+
+  allIds.add(id);
+  console.log(allIds);
+  return id;
 };
 
 const onDelete = (id) => {
   transactions.value = transactions.value.filter((t) => t.id !== id);
+  allIds.delete(id);
   toast.success("Transaction deleted");
 };
 </script>
