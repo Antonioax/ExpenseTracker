@@ -11,6 +11,6 @@ defineProps({
   <h4>Your Balance</h4>
   <h1 id="balance">
     $
-    {{ total }}
+    {{ total.toFixed(2) }}
   </h1>
 </template>

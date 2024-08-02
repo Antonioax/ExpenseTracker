@@ -33,7 +33,7 @@ const expense = computed(() => {
 });
 
 const onTransaction = (transaction) => {
-  transactions.value.push({
+  transactions.value.unshift({
     id: generateUniqueId(),
     text: transaction.text,
     amount: transaction.amount,
