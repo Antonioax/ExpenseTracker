@@ -18,13 +18,29 @@ const total = computed(() => {
     0
   );
 });
+
+const income = computed(() => {
+  return transactions.value
+    .filter((t) => t.amount > 0)
+    .reduce((acc, t) => acc + t.amount, 0)
+    .toFixed(2);
+});
+
+const expense = computed(() => {
+  return transactions.value
+    .filter((t) => t.amount < 0)
+    .reduce((acc, t) => acc + t.amount, 0)
+    .toFixed(2);
+});
+
+
 </script>
 
 <template>
   <Header></Header>
   <div class="container">
     <Balance :total="total"></Balance>
-    <IncomeExpenses></IncomeExpenses>
+    <IncomeExpenses :income="income" :expense="expense"></IncomeExpenses>
     <TransactionList :transactions="transactions"></TransactionList>
     <AddTransaction></AddTransaction>
   </div>
