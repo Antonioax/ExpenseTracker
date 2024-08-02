@@ -7,7 +7,7 @@ import AddTransaction from "./components/AddTransaction.vue";
 import { computed, ref } from "vue";
 
 const transactions = ref([
-  { id: 1, text: "Car", amount: 200 },
+  { id: 1, text: "Car", amount: 200.22 },
   { id: 2, text: "Car", amount: 200 },
   { id: 2, text: "Car", amount: -33 },
 ]);
@@ -40,7 +40,7 @@ const expense = computed(() => {
   <Header></Header>
   <div class="container">
     <Balance :total="total"></Balance>
-    <IncomeExpenses :income="income" :expense="expense"></IncomeExpenses>
+    <IncomeExpenses :income="+income" :expense="+expense"></IncomeExpenses>
     <TransactionList :transactions="transactions"></TransactionList>
     <AddTransaction></AddTransaction>
   </div>
